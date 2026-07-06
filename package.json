@@ -1,0 +1,12 @@
+{
+  "name": "nipun-gorakhpur-dashboard",
+  "version": "1.0.0",
+  "description": "NIPUN Bharat Gorakhpur District Dashboard API",
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "csv-parse": "^5.5.3",
+    "node-fetch": "^2.7.0"
+  }
+}
