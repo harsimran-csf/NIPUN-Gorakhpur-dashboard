@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIPUN Gorakhpur — API Test</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+    h1 { color: #003366; }
+    .endpoint { background: #f0f4f8; border-left: 4px solid #003366; padding: 12px 16px; margin: 12px 0; border-radius: 4px; }
+    .endpoint a { font-weight: bold; color: #003366; }
+    pre { background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 13px; }
+    #output { margin-top: 20px; }
+    button { background: #003366; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin: 4px; }
+    button:hover { background: #1a4d8a; }
+  </style>
+</head>
+<body>
+  <h1>NIPUN Gorakhpur — API Health Check</h1>
+  <p>Click any endpoint below to verify it returns data correctly.</p>
+
+  <div class="endpoint"><a href="/api/district">/api/district</a> — District KPIs + competency averages</div>
+  <div class="endpoint"><a href="/api/blocks">/api/blocks</a> — All 21 blocks with rankings</div>
+  <div class="endpoint"><a href="/api/blocks?block=Chargawan">/api/blocks?block=Chargawan</a> — Single block detail</div>
+  <div class="endpoint"><a href="/api/schools?month=May&page=0">/api/schools?month=May</a> — May school list (page 1)</div>
+  <div class="endpoint"><a href="/api/schools?month=May&priority=High">/api/schools?month=May&priority=High</a> — High priority schools</div>
+  <div class="endpoint"><a href="/api/competency">/api/competency</a> — All competency analysis</div>
+
+  <div>
+    <button onclick="test('/api/district')">Test /district</button>
+    <button onclick="test('/api/blocks')">Test /blocks</button>
+    <button onclick="test('/api/schools?month=May&page=0')">Test /schools</button>
+    <button onclick="test('/api/competency')">Test /competency</button>
+  </div>
+
+  <div id="output"><pre id="json-out">Click a button above to test an endpoint.</pre></div>
+
+  <script>
+    async function test(url) {
+      document.getElementById('json-out').textContent = 'Loading ' + url + ' ...';
+      try {
+        const res  = await fetch(url);
+        const json = await res.json();
+        document.getElementById('json-out').textContent = JSON.stringify(json, null, 2).slice(0, 3000) + '\n\n... (truncated for display)';
+      } catch (e) {
+        document.getElementById('json-out').textContent = 'ERROR: ' + e.message;
+      }
+    }
+  </script>
+</body>
+</html>
