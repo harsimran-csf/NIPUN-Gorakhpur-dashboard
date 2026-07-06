@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "NIPUN Bharat Gorakhpur District Dashboard API",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "dependencies": {
     "csv-parse": "^5.5.3",
